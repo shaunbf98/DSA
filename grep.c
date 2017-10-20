@@ -3919,6 +3919,11 @@ int main(int argc, char *argv[])
 
 	char *filename=argv[count+2];
 
+	if(grep_q==1)
+	{
+		exit(0);
+	}
+
 
 	if(grep_r==1)
 	{
