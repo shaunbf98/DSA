@@ -3853,6 +3853,7 @@ int main(int argc, char *argv[])
 
 	int option;
 	int count=0;
+	m_number=0;
 
 	while((option = getopt(argc, argv, "vHhriqwcm:b"))!=-1)
 		switch(option)
@@ -3922,6 +3923,12 @@ int main(int argc, char *argv[])
 	if(grep_q==1)
 	{
 		exit(0);
+	}
+	
+	if(m_number<0)
+	{
+		m_number=0;
+		grep_m=0;
 	}
 
 
