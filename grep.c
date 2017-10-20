@@ -1,7 +1,7 @@
 /**************************************************************************
  *   grep.c - by Shaun Fernandez,111608058 shaunfernandez98@gmail.com     *
  *                                                                        *
- *   Copyright (C) 2017  Shaun Benjamin Fernandez              		      *
+ *   Copyright (C) 2017  Shaun Benjamin Fernandez              		  *
  *                                                                        *
  *   GREP is free software: you can redistribute it and/or modify         *
  *   it under the terms of the GNU General Public License as published    *
