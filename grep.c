@@ -3916,9 +3916,25 @@ int main(int argc, char *argv[])
 		exit(0);
 	}
 
-	char *pattern=argv[count+1];
-
-	char *filename=argv[count+2];
+	char *pattern=argv[count+1];;
+	if(argv[count+2] ==0 && grep_r==0)
+	{
+		fprintf(stderr, "Usage: grep [OPTIONS]... PATTERN [FILENAME]...\n");
+		exit(0);
+	}
+	char *filename;
+	if(grep_r==0)
+	{
+		filename=argv[count+2];
+		int fp;
+		fp=open(filename, O_RDONLY);
+		if(fp==-1)
+		{
+			perror("Error");
+			exit(0);
+		}
+		close(fp);
+	}
 
 	if(grep_q==1)
 	{
