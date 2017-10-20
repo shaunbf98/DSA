@@ -31,6 +31,7 @@
 #include <dirent.h>
 #include <ctype.h>
 
+//Colors
 #define RED   "\x1B[31;1m"
 #define GREEN   "\x1b[32m"
 #define GRAY   "\x1B[37;3m"
