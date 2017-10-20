@@ -2927,9 +2927,6 @@ void grepv(char *pattern, char *filename)
 	}
 
 
-
-	char *lineptr,*ptr, i, pos;
-
 	int count;
 
 
@@ -3849,8 +3846,6 @@ void grepv(char *pattern, char *filename)
 
 int main(int argc, char *argv[])
 {
-	int i,j;
-
 	int option;
 	int count=0;
 	m_number=0;
