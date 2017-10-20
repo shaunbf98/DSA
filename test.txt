@@ -1,0 +1,13 @@
+gcc grep.c       (For compiling)
+
+Tested Commands
+---------------
+
+-h -m 10 shaun test
+-h -m -5 shaun test
+-H -c -m 5 shaun test
+-r -m 2 shaun
+-r -w -v shaun
+-r -w -i -H shaun
+-r -w -b -H -i shaun
+-r -c shaun test
