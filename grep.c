@@ -38,6 +38,7 @@
 #define RESET "\x1B[0m"
 
 //////OPTIONS///////
+ 	int grep_f;
 	int grep_v;
 	int grep_H;
 	int grep_h;
@@ -3842,15 +3843,37 @@ void grepv(char *pattern, char *filename)
 
 
 
+char *readfile(char *filename)
+{
+    FILE *file = fopen(filename, "r");
+    char *text;
+    int i = 0;
+    char ch;
 
+    if (file == NULL)
+     {
+		perror("Error");
+		exit(0);	
+     }		
+
+    text = malloc(1000);
+
+    while ((ch = fgetc(file)) != EOF)
+    {
+        text[i++] = ch;
+    }
+    text[i] = '\0';        
+    return text;
+}
 
 int main(int argc, char *argv[])
 {
 	int option;
 	int count=0;
 	m_number=0;
-
-	while((option = getopt(argc, argv, "vHhriqwcm:b"))!=-1)
+	char *patternfile;
+	char *filename;
+	while((option = getopt(argc, argv, "vHhriqwf:cm:b"))!=-1)
 		switch(option)
 		{
 			case 'v':
@@ -3877,6 +3900,12 @@ int main(int argc, char *argv[])
 					grep_q=1;
 					count++;
 					break;
+			case 'f':
+					grep_f=1;
+					count+=2;
+					patternfile = optarg;
+					break;
+
 			case 'w':
 					grep_w=1;
 					count++;
@@ -3911,36 +3940,76 @@ int main(int argc, char *argv[])
 		exit(0);
 	}
 
-	char *pattern=argv[count+1];;
-	if(argv[count+2] ==0 && grep_r==0)
+	char *pattern;
+
+
+	if(grep_f==0)
 	{
-		fprintf(stderr, "Usage: grep [OPTIONS]... PATTERN [FILENAME]...\n");
-		exit(0);
-	}
-	char *filename;
-	if(grep_r==0)
-	{
-		filename=argv[count+2];
-		int fp;
-		fp=open(filename, O_RDONLY);
-		if(fp==-1)
+		pattern=argv[count+1];
+		if(argv[count+2] == 0 && grep_r==0)
 		{
-			perror("Error");
+			fprintf(stderr, "Usage: grep [OPTIONS]... PATTERN [FILENAME]...\n");
 			exit(0);
 		}
-		close(fp);
+		if(grep_r==0)
+		{
+			filename=argv[count+2];
+			int fp;
+			fp=open(filename, O_RDONLY);
+			if(fp==-1)
+			{
+				perror("Error");
+				exit(0);
+			}	
+			close(fp);
+		}
+
+		if(grep_q==1)
+		{
+			exit(0);
+		}
+		
+		if(m_number<0)
+		{
+			m_number=0;
+			grep_m=0;
+		}
 	}
 
-	if(grep_q==1)
+	else if(grep_f==1)
 	{
-		exit(0);
+		pattern = readfile(patternfile);
+		if(argv[count+1] == 0 && grep_r==0)
+		{
+			fprintf(stderr, "Usage: grep [OPTIONS]... PATTERN [FILENAME]...\n");
+			exit(0);
+		}
+		if(grep_r==0)
+		{
+			filename=argv[count+1];
+			int fp;
+			fp=open(filename, O_RDONLY);
+			if(fp==-1)
+			{
+				perror("Error");
+				exit(0);
+			}	
+			close(fp);
+		}
+
+		if(grep_q==1)
+		{
+			exit(0);
+		}
+		
+		if(m_number<0)
+		{
+			m_number=0;
+			grep_m=0;
+		}
+
 	}
-	
-	if(m_number<0)
-	{
-		m_number=0;
-		grep_m=0;
-	}
+
 
 
 	if(grep_r==1)
