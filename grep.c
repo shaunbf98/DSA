@@ -88,7 +88,8 @@ int checkbinary(char *filename)
         else
         {
         	fclose(fp);
-        	printf("%s:- File is Binary.\n",filename);
+        	printf(GRAY "%s:",filename);
+        	printf(RESET" File is Binary\n");
             return 1;		//Binary
         }
     }
@@ -112,7 +113,7 @@ void grep(char *pattern, char *filename)
 		return ;
 	}
 
-	char line[256];
+	char line[512];
 
 
 	if(grep_H == 0 && grep_h == 0)
@@ -1263,7 +1264,7 @@ void grepw(char *pattern, char *filename)
 		return ;
 	}
 
-	char line[256];
+	char line[512];
 
 
 	if(grep_H == 0 && grep_h == 0)
@@ -2919,7 +2920,7 @@ void grepv(char *pattern, char *filename)
 		return ;
 	}
 
-	char line[256];
+	char line[512];
 
 
 	if(grep_H == 0 && grep_h == 0)
@@ -3856,7 +3857,7 @@ char *readfile(char *filename)
 		exit(0);	
      }		
 
-    text = malloc(1000);
+    text = malloc(512);
 
     while ((ch = fgetc(file)) != EOF)
     {
