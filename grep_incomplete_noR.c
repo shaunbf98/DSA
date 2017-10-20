@@ -1,4 +1,4 @@
-// GREP by Shaun Fernandez
+// Incomplete GREP
 
 #define _GNU_SOURCE
 #include <stdio.h>
