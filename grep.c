@@ -122,8 +122,8 @@ void grep(char *pattern, char *filename)
 	}
 
 
-
-	char *lineptr,*ptr, i, pos;
+	int i, pos;
+	char *lineptr,*ptr;
 
 	int count;
 
@@ -464,7 +464,7 @@ void grep(char *pattern, char *filename)
 			if(m_number<=matchcount)
 				break;
 		}
-		printf("%d\n", m_number);
+		printf("%d\n", matchcount);
 	}
 
 	if(grep_h==1 && grep_i==1  && (grep_w==0 && grep_c==1 && grep_m==1))
@@ -501,7 +501,7 @@ void grep(char *pattern, char *filename)
 			if(m_number<=matchcount)
 				break;
 		}
-		printf("%d\n", m_number);
+		printf("%d\n", matchcount);
 	}
 
 
@@ -540,7 +540,7 @@ void grep(char *pattern, char *filename)
 				break;
 		}
 		printgrep(0, filename, 0);
-		printf("%d\n", m_number);
+		printf("%d\n", matchcount);
 	}
 
 
@@ -580,7 +580,7 @@ void grep(char *pattern, char *filename)
 				break;
 		}
 		printgrep(0, filename, 0);
-		printf("%d\n", m_number);
+		printf("%d\n", matchcount);
 	}
 
 
@@ -589,7 +589,6 @@ void grep(char *pattern, char *filename)
 
 	// -b combinations
 	int byteposition=0;
-	int num=0;
 
 	if(grep_h==1 && grep_i==1  && (grep_w==0 && grep_c==0 && grep_m==0 && grep_b==1))
 	{
@@ -1156,7 +1155,7 @@ int atleastonewordi(char *line, char *pattern)
 {
 	char *ptr;
 
-	int flag = 0, i , pos;
+	int i , pos;
 	char *lineptr=line;
 	int lengthpattern=0;
 	for(i=0;pattern[i]!='\0';i++)		//Getting length of pattern
@@ -1196,7 +1195,7 @@ int atleastoneword(char *line, char *pattern)			//case sensitive
 {
 	char *ptr;
 
-	int flag = 0, i , pos;
+	int i , pos;
 	char *lineptr=line;
 	int lengthpattern=0;
 	for(i=0;pattern[i]!='\0';i++)		//Getting length of pattern
@@ -1273,8 +1272,8 @@ void grepw(char *pattern, char *filename)
 	}
 
 
-
-	char *lineptr,*ptr, i, pos;
+	int i, pos;
+	char *lineptr,*ptr;
 
 	int count, flag;
 
@@ -1299,7 +1298,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -1358,7 +1357,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_'))
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -1421,7 +1420,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_'))
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -1480,7 +1479,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -1541,7 +1540,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -1601,7 +1600,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -1662,7 +1661,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_'))
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -1723,7 +1722,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -1789,7 +1788,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -1827,7 +1826,7 @@ void grepw(char *pattern, char *filename)
 			if(matchcount>=m_number)
 				break;
 		}
-		printf("%d\n", m_number);
+		printf("%d\n", matchcount);
 	}
 
 
@@ -1851,7 +1850,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -1889,7 +1888,7 @@ void grepw(char *pattern, char *filename)
 				break;
 			//printf("%s", lineptr);
 		}
-		printf("%d\n", m_number);
+		printf("%d\n", matchcount);
 	}
 
 
@@ -1913,7 +1912,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -1952,7 +1951,7 @@ void grepw(char *pattern, char *filename)
 				break;
 		}
 		printgrep(0, filename, 0);
-		printf("%d\n", m_number);
+		printf("%d\n", matchcount);
 	}
 
 
@@ -1976,7 +1975,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_'))
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2015,7 +2014,7 @@ void grepw(char *pattern, char *filename)
 			//printf("%s", lineptr);
 		}
 		printgrep(0, filename, 0);
-		printf("%d\n", m_number);
+		printf("%d\n", matchcount);
 	}
 
 
@@ -2038,7 +2037,10 @@ void grepw(char *pattern, char *filename)
 			lineptr = line;
 
 			if(atleastonewordi(line, pattern)==0)
+			{
+				byteposition=ftell(file);
 				continue;
+			}
 
 			ptr=strcasestr(lineptr, pattern);
 			if(ptr==line)
@@ -2049,7 +2051,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2102,8 +2104,11 @@ void grepw(char *pattern, char *filename)
 			}
 			lineptr = line;
 
-			if(atleastoneword(line, pattern)==0)
+			if(atleastonewordi(line, pattern)==0)
+			{
+				byteposition=ftell(file);
 				continue;
+			}
 
 			ptr=strstr(lineptr, pattern);
 			if(ptr==line)
@@ -2115,7 +2120,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2168,7 +2173,10 @@ void grepw(char *pattern, char *filename)
 			lineptr = line;
 
 			if(atleastonewordi(line, pattern)==0)
+			{
+				byteposition=ftell(file);
 				continue;
+			}
 
 			ptr=strcasestr(lineptr, pattern);
 			if(ptr==line)
@@ -2180,7 +2188,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_'))
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2233,8 +2241,11 @@ void grepw(char *pattern, char *filename)
 			}
 			lineptr = line;
 
-			if(atleastoneword(line, pattern)==0)
+			if(atleastonewordi(line, pattern)==0)
+			{
+				byteposition=ftell(file);
 				continue;
+			}
 
 			ptr=strstr(lineptr, pattern);
 			if(ptr==line)
@@ -2246,7 +2257,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2301,6 +2312,7 @@ void grepw(char *pattern, char *filename)
 
 			if(atleastonewordi(line, pattern)==0)
 				continue;
+
 			matchcount++;
 			ptr=strcasestr(lineptr, pattern);
 			if(ptr==line)
@@ -2309,7 +2321,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2371,7 +2383,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2436,7 +2448,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_'))
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2499,7 +2511,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2556,7 +2568,11 @@ void grepw(char *pattern, char *filename)
 			lineptr = line;
 
 			if(atleastonewordi(line, pattern)==0)
+			{
+				byteposition=ftell(file);
 				continue;
+			}
+
 			matchcount++;
 			ptr=strcasestr(lineptr, pattern);
 			if(ptr==line)
@@ -2567,7 +2583,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2623,8 +2639,12 @@ void grepw(char *pattern, char *filename)
 			}
 			lineptr = line;
 
-			if(atleastoneword(line, pattern)==0)
+			if(atleastonewordi(line, pattern)==0)
+			{
+				byteposition=ftell(file);
 				continue;
+			}
+
 			matchcount++;
 			ptr=strstr(lineptr, pattern);
 			if(ptr==line)
@@ -2635,7 +2655,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2694,7 +2714,11 @@ void grepw(char *pattern, char *filename)
 			lineptr = line;
 
 			if(atleastonewordi(line, pattern)==0)
+			{
+				byteposition=ftell(file);
 				continue;
+			}
+
 			matchcount++;
 			ptr=strcasestr(lineptr, pattern);
 			if(ptr==line)
@@ -2706,7 +2730,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_')) 
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2763,8 +2787,12 @@ void grepw(char *pattern, char *filename)
 			}
 			lineptr = line;
 
-			if(atleastoneword(line, pattern)==0)
+			if(atleastonewordi(line, pattern)==0)
+			{
+				byteposition=ftell(file);
 				continue;
+			}
+
 			matchcount++;
 			ptr=strstr(lineptr, pattern);
 			if(ptr==line)
@@ -2776,7 +2804,7 @@ void grepw(char *pattern, char *filename)
 			{
 				count = 0;
 				pos = ptr - lineptr;
-				if((flag==10 && isalnum(ptr[strlen(pattern)])==0) || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0)) 
+				if((flag==10 && isalnum(ptr[strlen(pattern)])==0 && ptr[strlen(pattern)]!='_') || (isalnum(ptr[-1])==0 && isalnum(ptr[strlen(pattern)])==0 && ptr[-1]!='_' && ptr[strlen(pattern)]!='_'))
 				{
 					for(i=0;i<pos;i++)
 					{
@@ -2833,6 +2861,8 @@ int is_regular_file(const char *path)
 }
 
 
+
+
 void grepr(char *path, int flag, char *pattern)
 {
     DIR * dp = opendir(path);
@@ -2886,18 +2916,6 @@ void grepr(char *path, int flag, char *pattern)
 }
 
 	
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -3607,7 +3625,7 @@ void grepv(char *pattern, char *filename)
 			if(count>=m_number)
 				break;
 		}
-		printf("%d\n", m_number);
+		printf("%d\n", count);
 
 	}
 	//h w v c m
@@ -3624,7 +3642,7 @@ void grepv(char *pattern, char *filename)
 			if(count>=m_number)
 				break;
 		}
-		printf("%d\n", m_number);
+		printf("%d\n", count);
 	}
 
 
@@ -3664,7 +3682,7 @@ void grepv(char *pattern, char *filename)
 				break;
 		}
 		printgrep(0, filename, 0);
-		printf("%d\n", m_number);
+		printf("%d\n", count);
 
 	}
 
@@ -4030,20 +4048,3 @@ int main(int argc, char *argv[])
 		grep(pattern, filename);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
