@@ -3943,19 +3943,19 @@ int main(int argc, char *argv[])
 					count++;
 					break;
 			default:
-					fprintf(stderr, "Usage: grep [OPTIONS]... PATTERN [FILENAME]...\n");
+					fprintf(stderr, "Usage: ./grep [OPTIONS]... PATTERN [FILENAME]...\n");
 					exit(0);
 			}
 
 	if(argc<3)
 	{
-		fprintf(stderr, "Usage: grep [OPTIONS]... PATTERN [FILENAME]...\n");
+		fprintf(stderr, "Usage: ./grep [OPTIONS]... PATTERN [FILENAME]...\n");
 		exit(0);
 	}
 
 	if(grep_h == 1 && grep_H == 1)
 	{
-		fprintf(stderr, "Usage: grep [OPTIONS]... PATTERN [FILENAME]...  -h and -H have opposite effects\n");
+		fprintf(stderr, "Usage: ./grep [OPTIONS]... PATTERN [FILENAME]...  -h and -H have opposite effects\n");
 		exit(0);
 	}
 
@@ -3967,7 +3967,7 @@ int main(int argc, char *argv[])
 		pattern=argv[count+1];
 		if(argv[count+2] == 0 && grep_r==0)
 		{
-			fprintf(stderr, "Usage: grep [OPTIONS]... PATTERN [FILENAME]...\n");
+			fprintf(stderr, "Usage: ./grep [OPTIONS]... PATTERN [FILENAME]...\n");
 			exit(0);
 		}
 		if(grep_r==0)
@@ -4029,11 +4029,46 @@ int main(int argc, char *argv[])
 
 	}
 
+	if((argv[count+1]==0 && grep_f==0))
+	{
+		fprintf(stderr, "Usage: ./grep [OPTIONS]... PATTERN [FILENAME]...\n");
+		exit(0);
+	}
 
+	int i;
 
 	if(grep_r==1)
 	{
-		grepr(".", 1, pattern);
+		if(grep_f==0 && argv[count+2]==0)
+		{
+			grepr(".", 1, pattern);
+		}
+		else if(grep_f==1)
+		{
+			if(argv[count+1]==0)
+			{
+				grepr(".", 1, pattern);
+			}
+			else
+			{
+				strcpy(filename, argv[count+1]);
+				if(filename[strlen(filename)-1]=='/')
+				{
+					i = strlen(filename)-1;
+					while(filename[i]=='/')
+						filename[i--]='\0';
+				}
+				grepr(filename, 1, pattern);
+			}
+		}
+		else if(grep_f==0)
+		{
+			strcpy(filename, argv[count+2]);
+			i = strlen(filename)-1;
+			while(filename[i]=='/')
+				filename[i--]='\0';
+			grepr(filename, 1, pattern);
+		}
 	}
 	else if(grep_v==1)
 	{
