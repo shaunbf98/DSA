@@ -4000,7 +4000,7 @@ int main(int argc, char *argv[])
 		pattern = readfile(patternfile);
 		if(argv[count+1] == 0 && grep_r==0)
 		{
-			fprintf(stderr, "Usage: grep [OPTIONS]... PATTERN [FILENAME]...\n");
+			fprintf(stderr, "Usage: ./grep [OPTIONS]... PATTERN [FILENAME]...\n");
 			exit(0);
 		}
 		if(grep_r==0)
